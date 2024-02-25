@@ -1,0 +1,60 @@
+.cesium-viewer {
+    width: 100vw;
+    height: 100vh;
+}
+
+.cesium-viewer-cesiumWidgetContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer-cesiumWidgetContainer  {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-widget {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer-bottom {
+    display: none;
+}
+
+.cesium-viewer-selectionIndicatorContainer {
+    display: none;
+}
+
+.cesium-viewer-infoBoxContainer {
+    display: none;
+}
+
+.cesium-viewer-toolbar {
+    display: none;
+}
+
+.cesium-viewer-timelineContainer {
+    display: none;
+}
+
+.cesium-viewer-fullscreenContainer {
+    display: none;
+}
+
+.cesium-viewer-fullscreenContainer button {
+    display: none;
+}
+
+.cesium-svgPath-svg {
+    display: none;
+}
+
+.cesium-viewer-animationContainer {
+    display: none;
+}
