@@ -1,17 +1,24 @@
+import Decoder from '$lib/Decoder.js';
+
+
 export const GET = async ({ request, url }) => {
 	const southLat = url.searchParams.get('southLat');
 	const northLat = url.searchParams.get('northLat');
 	const westLon = url.searchParams.get('westLon');
 	const eastLon = url.searchParams.get('eastLon');
+	const headers = url.searchParams.get('headers');
 
 	try {
-		const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/8.6.0' } };
-		const baseUrl = 'https://adsb.lol/re-api';
-		const response = await fetch(`${baseUrl}/?box=${southLat},${northLat},${westLon},${eastLon}`, options);
 
+		const options = { method: 'GET', headers: JSON.parse(headers) };
+
+		const baseUrl = 'https://globe.adsb.fi/re-api';
+
+		const response = await fetch(`${baseUrl}/?binCraft&zstd&box=${southLat},${northLat},${westLon},${eastLon}`, options);
 
 		if (response.ok) {
-			const data = await response.json();
+			const buffer = await response.arrayBuffer()
+			const data = await Decoder.decode(buffer);
 			return successResponse(data);
 		} else {
 			return errorResponse(response.statusText);
@@ -22,7 +29,6 @@ export const GET = async ({ request, url }) => {
 };
 
 function jsonResponse(body, status) {
-
 	return new Response(JSON.stringify(body), { status });
 }
 

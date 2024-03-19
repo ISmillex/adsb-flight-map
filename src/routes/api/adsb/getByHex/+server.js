@@ -1,14 +1,21 @@
+import Decoder from '$lib/Decoder.js';
+
 export const GET = async ({ request, url }) => {
 
 	const hex = url.searchParams.get('hex');
+	const headers = url.searchParams.get('headers');
 
 	try {
-		const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/8.6.0' } };
-		const baseUrl = 'https://adsb.lol/re-api';
+		const options = { method: 'GET', headers: JSON.parse(headers) };
+
+		const baseUrl = 'https://globe.adsb.fi/re-api';
+
+
 		const response = await fetch(`${baseUrl}/?find_hex=${hex}`, options);
 
 		if (response.ok) {
-			const data = await response.json();
+			const buffer = await response.arrayBuffer()
+			const data = await Decoder.decode(buffer);
 			return successResponse(data);
 		} else {
 			errorResponse(response.statusText);

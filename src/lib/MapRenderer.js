@@ -55,7 +55,7 @@ export default class MapRenderer {
 	// Method to set the initial camera position
 	setInitialCameraPosition() {
 		this.viewer.camera.flyTo({
-			destination: Cesium.Cartesian3.fromDegrees(15, 49, 3000000),
+			destination: Cesium.Cartesian3.fromDegrees(36, 42, 3000000),
 			duration: 0,
 		});
 	}
@@ -284,7 +284,10 @@ export default class MapRenderer {
 	// Method to start the camera scope loop
 	startCameraScopeLoop(seconds = 2000) {
 		this.cameraScopeInterval = setInterval(() => {
+			const start = performance.now();
 			this.updateAircraftsInCameraScope();
+			const end = performance.now();
+			console.log('Update aircrafts in camera scope took', end - start, 'ms');
 			this.stopCameraScopeLoop();
 			this.startCameraScopeLoop();
 		}, (this.cameraScopeAircrafts.size > seconds) ? 3000 : seconds);

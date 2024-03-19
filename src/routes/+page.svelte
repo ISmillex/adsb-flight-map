@@ -9,6 +9,7 @@
 	import HandlersManager from '../managers/HandlersManager.js';
 	import TableManager from '../managers/TableManager.js';
 
+
 	import { onMount } from "svelte";
 	import { stores } from '$lib/Stores.js';
 	import * as Cesium from 'cesium';
@@ -34,9 +35,10 @@
 
 		TableManager.startAircraftTableLoop();
 
-		renderer.startCameraScopeLoop();
-		renderer.startSelectedAircraftsLoop();
-		renderer.startRenderAircraftsLoop();
+		renderer.startCameraScopeLoop();//
+		renderer.startSelectedAircraftsLoop(); // sonra
+		renderer.startRenderAircraftsLoop(); //
+
 
 	})
 

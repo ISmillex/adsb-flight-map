@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import Decoder from '$lib/Decoder.js';
 
 export default class Fetcher {
 	constructor() {
@@ -17,7 +18,11 @@ export default class Fetcher {
 		this.defaultOptions = {
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json'
+				"accept": "*/*",
+				"accept-language": "en-US,en;q=0.9",
+				"x-requested-with": "XMLHttpRequest",
+				"Referer": "https://globe.adsb.fi/",
+				"Referrer-Policy": "strict-origin-when-cross-origin"
 			}
 		};
 		this.SOUTH = -90;
@@ -25,6 +30,8 @@ export default class Fetcher {
 		this.WEST = -180;
 		this.EAST = 180;
 	}
+
+
 
 	async makeRequest(url, options = this.defaultOptions) {
 		try {
@@ -39,17 +46,17 @@ export default class Fetcher {
 	}
 
 	async fetchAircraftsByBounds(south, north, west, east) {
-		const url = `${this.BASE_URL}${this.ENDPOINTS.getByBounds}?southLat=${south}&northLat=${north}&westLon=${west}&eastLon=${east}`;
+		const url = `${this.BASE_URL}${this.ENDPOINTS.getByBounds}?southLat=${south}&northLat=${north}&westLon=${west}&eastLon=${east}&headers=${JSON.stringify(this.defaultOptions.headers)}`;
 		return await this.makeRequest(url);
 	}
 
 	async fetchAircraftByHex(hex) {
-		const url = `${this.BASE_URL}${this.ENDPOINTS.getByHex}?hex=${hex}`;
+		const url = `${this.BASE_URL}${this.ENDPOINTS.getByHex}?hex=${hex}&headers=${JSON.stringify(this.defaultOptions.headers)}`;
 		return await this.makeRequest(url);
 	}
 
 	async fetchAllAircrafts() {
-		const url = `${this.BASE_URL}${this.ENDPOINTS.getByBounds}?southLat=${this.SOUTH}&northLat=${this.NORTH}&westLon=${this.WEST}&eastLon=${this.EAST}`;
+		const url = `${this.BASE_URL}${this.ENDPOINTS.getByBounds}?southLat=${this.SOUTH}&northLat=${this.NORTH}&westLon=${this.WEST}&eastLon=${this.EAST}&headers=${JSON.stringify(this.defaultOptions.headers)}`;
 		return await this.makeRequest(url);
 	}
 
