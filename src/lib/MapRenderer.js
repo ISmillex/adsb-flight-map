@@ -284,10 +284,7 @@ export default class MapRenderer {
 	// Method to start the camera scope loop
 	startCameraScopeLoop(seconds = 2000) {
 		this.cameraScopeInterval = setInterval(() => {
-			const start = performance.now();
 			this.updateAircraftsInCameraScope();
-			const end = performance.now();
-			console.log('Update aircrafts in camera scope took', end - start, 'ms');
 			this.stopCameraScopeLoop();
 			this.startCameraScopeLoop();
 		}, (this.cameraScopeAircrafts.size > seconds) ? 3000 : seconds);

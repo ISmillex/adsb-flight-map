@@ -23,6 +23,13 @@ export const NO_SELECTED_AIRCRAFT = 'no_selected_aircraft';
 
 
 
+export const APIS = {
+	'exchange': 'globe.adsbexchange.com',
+	'fi': 'globe.adsb.fi',
+	'lol': 'adsb.lol',
+	'one': 'globe.adsb.one',
+	'aal': 'globe.airplanes.live'
+}
 
 
 export const AIRCRAFT_MAP = [

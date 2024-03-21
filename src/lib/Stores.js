@@ -1,10 +1,15 @@
 import { writable } from 'svelte/store';
-import {AIRCRAFT_MAP} from './Constants.js';
+import {AIRCRAFT_MAP, APIS} from './Constants.js';
+
+
+
 
 export const stores = writable({
 
 	viewer: null,
 	selectedAircraft: null,
+
+	currentApi: APIS.exchange,
 
 	isMenuOpen: false,
 	isFilterOpen: false,

@@ -1,4 +1,5 @@
 import Decoder from '$lib/Decoder.js';
+import {currentApi} from "../../../../managers/StoreManager.js";
 
 export const GET = async ({ request, url }) => {
 
@@ -8,10 +9,11 @@ export const GET = async ({ request, url }) => {
 	try {
 		const options = { method: 'GET', headers: JSON.parse(headers) };
 
-		const baseUrl = 'https://globe.adsb.fi/re-api';
+		const baseUrl = `https://${currentApi}/re-api`;
 
 
-		const response = await fetch(`${baseUrl}/?find_hex=${hex}`, options);
+		const response = await fetch(`${baseUrl}/?binCraft&zstd&find_hex=${hex}`, options);
+
 
 		if (response.ok) {
 			const buffer = await response.arrayBuffer()

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import Decoder from '$lib/Decoder.js';
+import {currentApi} from '../managers/StoreManager.js';
 
 export default class Fetcher {
 	constructor() {
@@ -17,13 +17,7 @@ export default class Fetcher {
 		};
 		this.defaultOptions = {
 			method: 'GET',
-			headers: {
-				"accept": "*/*",
-				"accept-language": "en-US,en;q=0.9",
-				"x-requested-with": "XMLHttpRequest",
-				"Referer": "https://globe.adsb.fi/",
-				"Referrer-Policy": "strict-origin-when-cross-origin"
-			}
+			headers: this.selectHeader()
 		};
 		this.SOUTH = -90;
 		this.NORTH = 90;
@@ -32,6 +26,58 @@ export default class Fetcher {
 	}
 
 
+	selectHeader() {
+		switch (currentApi) {
+			case 'globe.adsb.fi':
+				return {
+					"accept": "*/*",
+					"accept-language": "en-US,en;q=0.9",
+					"x-requested-with": "XMLHttpRequest",
+					"Referer": "https://globe.adsb.fi/",
+					"Referrer-Policy": "strict-origin-when-cross-origin"
+				};
+			case 'adsb.lol':
+				return {
+					"accept": "*/*",
+					"accept-language": "en-US,en;q=0.9",
+					"x-requested-with": "XMLHttpRequest",
+					"Referer": "https://adsb.lol/",
+					"Referrer-Policy": "strict-origin-when-cross-origin"
+				};
+			case 'globe.adsb.one':
+				return {
+					"accept": "*/*",
+					"accept-language": "en-US,en;q=0.9",
+					"x-requested-with": "XMLHttpRequest",
+					"Referer": "https://globe.adsb.one/",
+					"Referrer-Policy": "strict-origin-when-cross-origin"
+				};
+			case 'globe.adsbexchange.com':
+				return {
+					"accept": "*/*",
+					"accept-language": "en-US,en;q=0.9",
+					"sec-ch-ua": "\"Not(A:Brand\";v=\"24\", \"Chromium\";v=\"122\"",
+					"sec-ch-ua-mobile": "?0",
+					"sec-ch-ua-platform": "\"macOS\"",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-origin",
+					"x-requested-with": "XMLHttpRequest",
+					"cookie": "adsbx_sid=1711186880861_av2lefsay3v",
+					"Referer": "https://globe.adsbexchange.com/",
+					"Referrer-Policy": "strict-origin-when-cross-origin"
+				};
+			case "globe.airplanes.live":
+				return {
+					"accept": "*/*",
+					"accept-language": "en-US,en;q=0.9",
+					"x-requested-with": "XMLHttpRequest",
+					"Referer": "https://globe.airplanes.live/",
+					"Referrer-Policy": "strict-origin-when-cross-origin"
+				};
+		}
+
+	}
 
 	async makeRequest(url, options = this.defaultOptions) {
 		try {

@@ -7,20 +7,20 @@ export let selectedAircraft;
 export let filters;
 export let sortOptions;
 export let buttons;
-export let selectTableAircraft
 export let tableItemsPerPage;
 export let tableAircrafts;
 export let paginationClick;
+export let currentApi;
 
 stores.subscribe($stores => viewer = $stores.viewer);
 stores.subscribe($stores => selectedAircraft = $stores.selectedAircraft);
 stores.subscribe($stores => buttons = $stores.buttons);
 stores.subscribe($stores => filters = $stores.filters);
 stores.subscribe($stores => sortOptions = $stores.sortOptions);
-stores.subscribe($stores => selectTableAircraft = $stores.selectTableAircraft);
 stores.subscribe($stores => tableItemsPerPage = $stores.tableItemsPerPage);
 stores.subscribe($stores => tableAircrafts = $stores.tableAircrafts);
 stores.subscribe($stores => paginationClick = $stores.paginationClick);
+stores.subscribe($stores => currentApi = $stores.currentApi);
 
 
 

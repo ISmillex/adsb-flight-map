@@ -40,7 +40,7 @@
         display: flex;
         flex-direction: column;
         overflow-y: auto;
-				max-height: 200px;
+				max-height: 100px;
 				position: relative;
     }
 
